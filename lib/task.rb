@@ -16,9 +16,12 @@ class Task
         tasks = []
         returned_tasks.each() do |task|
             description = task.fetch("description")
-            task.push(Task.new({:description => description}))
+            tasks.push(Task.new({:description => description}))
         end
         tasks
+    end
 
+    define_method(:save) do
+        DB.exec("INSERT INTO tasks (description) VALUES ('#{@description}');")
     end
 end
