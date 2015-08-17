@@ -1,15 +1,4 @@
-require('rspec')
-require('pg')
-require('task')
-
-DB = PG.connect({:dbname => "to_do_test"})
-
-RSpec.configure do |config|
-    config.after(:each) do
-        DB.exec("DELETE FROM tasks *;")
-    end
-end
-
+require("spec_helper")
 
 describe(Task) do
     describe('#==') do
@@ -46,5 +35,19 @@ describe(Task) do
             test_task = Task.new({:description => "learn SQL", :list_id =>1})
             expect(test_task.list_id()).to(eq(1))
         end
+    end
+
+    describe(".order_by") do
+        it("sorts task based by its description") do
+            test_task1 = Task.new({:description => "walk dog", :list_id => 2})
+            test_task1.save()
+            test_task2 = Task.new({:description => "feed cat", :list_id => 3})
+            test_task2.save()
+            test_task3 = Task.new({:description => "walk dog", :list_id => 4})
+            test_task3.save()
+            expect(Task.order_by()).to(eq([test_task2, test_task1, test_task3]))
+
+        end
+
     end
 end

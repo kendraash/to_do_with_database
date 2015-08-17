@@ -25,4 +25,16 @@ class Task
     define_method(:save) do
         DB.exec("INSERT INTO tasks (description, list_id) VALUES ('#{@description}', #{@list_id});")
     end
+
+    define_singleton_method(:order_by) do
+        returned_tasks = DB.exec("SELECT * FROM tasks ORDER BY description;")
+        ordered_tasks = []
+        returned_tasks.each() do |task|
+            description = task.fetch("description")
+            list_id = task.fetch("list_id").to_i()
+            ordered_tasks.push(Task.new({:description => description, :list_id => list_id}))
+        end
+        ordered_tasks
+    end
+
 end
