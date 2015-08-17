@@ -6,6 +6,14 @@ class List
         @id = attributes.fetch(:id)
     end
 
+    define_method(:name) do
+        @name
+    end
+
+    define_method(:id) do
+        @id
+    end
+
     define_singleton_method(:all) do
         returned_lists = DB.exec("SELECT * FROM lists;")
         lists = []

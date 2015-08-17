@@ -1,0 +1,7 @@
+<h1>To Do List:</h1>
+<ul>
+    <% List.all().each() do |list| %>
+    <li><%= list.name() %> <%= list.id() %></li>
+    <% end %>
+</ul>
+<a href="/list" class="btn">Add a new list</a>
