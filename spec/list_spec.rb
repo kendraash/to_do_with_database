@@ -20,4 +20,11 @@ describe(List) do
     end
   end
 
+  describe("#name") do
+      it("tells you its name") do
+          list = List.new({:name => "Epicodus stuff", :id => nil})
+          expect(list.name()).to(eq("Epicodus stuff"))
+      end
+  end
+
 end
