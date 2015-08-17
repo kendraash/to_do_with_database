@@ -27,4 +27,22 @@ describe(List) do
       end
   end
 
+  describe("#id") do
+      it("sets its ID when you save it") do
+          list = List.new({:name => "Epicudoes stuff", :id => nil})
+          list.save()
+          expect(list.id()).to(be_an_instance_of(Fixnum))
+      end
+
+  end
+
+  describe("#save") do
+     it("lets you save lists to the database") do
+        list = List.new({:name => "Epicodus stuff", :id => nil})
+        list.save()
+        expect(List.all()).to(eq([list]))
+     end
+  end
+
+
 end
